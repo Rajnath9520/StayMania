@@ -38,9 +38,14 @@ geometry: {
 },
 category: {
         type:String,
-        enum:['Rooms','Iconic Cities','Castles','camping','Farms','Boats'],
+        enum:['Trending','Rooms', 'Iconic Cities', 'Castles', 'Camping', 'Farms', 'Boats', 'Arctic', 'Amazing Pools', 'Domes'],
         required:true
     },
+views:{
+    type:Number,
+    default:0,
+},
+
 });
 
 listingSchema.post("findOneAndDelete",async(listing)=>{

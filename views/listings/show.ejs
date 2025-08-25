@@ -17,9 +17,10 @@
         <div class="card-body">
           <p class="card-text">Owned by <i><%= Listing.owner.username %></i></p>
           <p class="card-text"><%= Listing.description %></p>
-          <p class="card-text">₹ <%= Listing.price.toLocaleString("en-IN") %></p>
+          <p class="card-text">₹ <%= Listing.price.toLocaleString("en-IN") %>  +18% GST = <%= (Listing.price * 1.18).toFixed(2) %></p>
           <p class="card-text"><%= Listing.location %></p>
           <p class="card-text"><%= Listing.country %></p>
+          <p class="card-text">👁️ <%= Listing.views %> views</p>
 
           <% if(curUser && curUser._id.equals(Listing.owner._id)){ %>
             <div class="d-flex gap-2 mt-3">

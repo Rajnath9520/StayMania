@@ -23,6 +23,9 @@ module.exports.showListing = async(req,res)=>{
         req.flash("error","Listing ,You requested for does not exist!");
         res.redirect("/listings");
     }
+    Listing.views += 1;
+    await Listing.save();
+
     res.render("listings/show.ejs",{Listing});
 };
 
@@ -57,7 +60,7 @@ module.exports.renderEditForm = async(req,res)=>{
     let {id} = req.params;
     const Listing = await listing.findById(id);
     if(!Listing){
-        req.flash("error","Listing ,You requested for does not exist!");
+        req.flash("error","Mania ,You requested for does not exist!");
         res.redirect("/listings");
     } 
     let originalImageUrl = Listing.image.url;
@@ -76,21 +79,48 @@ module.exports.updateListing = async(req,res)=>{
     await editListing.save();
     }
     
-    req.flash("success","Listing Updated");
+    req.flash("success","Mania Updated");
     res.redirect(`/listings/${id}`);
 };
 
 module.exports.categoryListings = async (req, res) => {
     const { category } = req.params;
-    const allListings = await listing.find({ category });
-    res.render("listings/index.ejs", { allListings, category });
+
+    let allListings;
+    if (category === "Trending") {
+        // Instead of filtering by category, sort by views
+        allListings = await listing.find({}).sort({ views: -1 }).limit(4);
+    } else {
+        allListings = await listing.find({ category });
+    }
+
+    const trendingListings = await listing.find({}).sort({ views: -1 }).limit(4);
+
+    res.render("listings/index.ejs", { allListings, category, trendingListings });
 };
 
+module.exports.categorySearch = async (req, res) => {
+    const query = req.query.q || "";
+    let allListings = [];
+
+    if (query.trim() !== "") {
+        allListings = await listing.find({
+            $or: [
+                { title: { $regex: query, $options: "i" } },
+                { description: { $regex: query, $options: "i" } },
+                { location: { $regex: query, $options: "i" } },
+                { category: { $regex: query, $options: "i" } },
+            ]
+        });
+    }
+
+    res.render("listings/index.ejs", { allListings });
+};
 
 module.exports.destroyListing = async(req,res)=>{
     let {id} = req.params;
     let deleteListing= await listing.findByIdAndDelete(id);
     console.log(deleteListing);
-    req.flash("success","Listing deleted");
+    req.flash("success","Mania deleted");
     res.redirect("/listings");
 };

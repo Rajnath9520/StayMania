@@ -11,7 +11,10 @@
         margin-right:2rem;
         margin-top: 2rem;
         opacity: 0.8;
-        transition: opacity 0.2s
+        transition: opacity 0.2s;
+        color: inherit;            
+        text-decoration: none;     
+        display: inline-block;  
     }
     .filter:hover{
         opacity: 1;
@@ -32,53 +35,65 @@
         display: flex;
         align-items: center;
     }
+
+    .filter:visited,
+    .filter:focus,
+    .filter:active {
+        color: inherit;
+        text-decoration: none;
+        outline: none;
+    }
+
 </style>
 <div class="container">
 <div id="filters" >
-    <div  class="filter">
-        <a> <div><i class="fa-solid fa-fire"></i></div></a>
+    <a href="/listings/category/Trending" class="filter">
+        <div><i class="fa-solid fa-fire"></i></div>
         <p>Trending</p>
-    </div>
-    <div  class="filter">
-        <a href="/listings/category/Rooms"><div> <i class="fa-solid fa-bed"></i></div></a>
+    </a>
+        
+    
+    <a href="/listings/category/Rooms" class="filter">
+        <div> <i class="fa-solid fa-bed"></i></div>
         <p>Rooms</p>
-    </div>
-    <div class="filter">
-        <a href="/listings/category/Iconic%20Cities"><div><i class="fa-solid fa-mountain-city"></i></div></a>
+    </a>
+
+    <a href="/listings/category/Iconic%20Cities"class="filter">
+        <div><i class="fa-solid fa-mountain-city"></i></div>
         <p>Iconic Cities</p>
-    </div>
-    <div class="filter">
-        <a href="/listings/category/Castles"><div><i class="fa-brands fa-fort-awesome"></i></div></a>
+    </a>
+    <a href="/listings/category/Castles" class="filter">
+        <div><i class="fa-brands fa-fort-awesome"></i></div>
         <p>Castles</p>
-    </div>
-    <div class="filter">
-        <a><div><i class="fa-solid fa-person-swimming"></i></div></a>
+    </a>
+    <a href="/listings/category/Amazing%20Pools" class="filter">
+        <div><i class="fa-solid fa-person-swimming"></i></div>
         <p>Amazing Pools</p>
-    </div>
-    <div class="filter">
-        <a><div><i class="fa-solid fa-campground"></i></div></a>
+    </a>
+    <a href="/listings/category/Camping" class="filter">
+        <div><i class="fa-solid fa-campground"></i></div>
         <p>Camping</p>
-    </div>
-    <div class="filter">
-        <a><div><i class="fa-solid fa-cow"></i></div></a>
+    </a>
+    <a href="/listings/category/Farms" class="filter">
+        <div><i class="fa-solid fa-cow"></i></div>
         <p>Farms</p>
-    </div>
-    <div class="filter">
-        <a><div><i class="fa-solid fa-cow"></i></div></a>
+    </a>
+    <a href="/listings/category/Arctic" class="filter">
+        <div><i class="fa-solid fa-cow"></i></div>
         <p>Arctic</p>
-    </div>
-    <div class="filter">
-        <a><div><i class="fa-solid fa-globe"></i></div></a>
+    </a>
+    <a href="/listings/category/Deserts" class="filter">
+        <div><i class="fa-solid fa-globe"></i></div>
         <p>Desert</p>
-    </div>
-        <div class="filter">
-        <a><div><i class="fa-solid fa-landmark-dome"></i></div></a>
+    </a>
+    <a href="/listings/category/Domes" class="filter">
+        <div><i class="fa-solid fa-landmark-dome"></i></div>
         <p>Domes</p>
-    </div>
-    <div class="filter">
-        <a  href="/listings/category/Boats"><div><i class="fa-solid fa-sailboat"></i></div></a>
+    </a>
+    <a href="/listings/category/Boats" class="filter">
+        <div><i class="fa-solid fa-sailboat"></i></div>
         <p>Boats</p>
-    </div>
+    </a>
 
     <div class="tax-toggle">
     <div class="form-check-reverse form-switch">
@@ -98,7 +113,7 @@
         <p class="card-text"> 
             <b><%= Listing.title %></b><br>
             &#x20B9;<%= (Listing.price || 0).toLocaleString() %>/night
-            <i class="tax-info">&nbsp; &nbsp; +18% GST</i>
+            <i class="tax-info">&nbsp; &nbsp; +18% GST = <%= (Listing.price * 1.18).toFixed(2) %></i>
         </p>
     </div>
 </div>

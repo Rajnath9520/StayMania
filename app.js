@@ -19,6 +19,9 @@ const User = require("./models/user.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter= require("./routes/review.js");
 const userRouter = require("./routes/user.js");
+const wrapAsync = require('./utils/wrapAsync.js');
+
+const listing = require("./models/listing.js");
 
 
 const dbUrl = process.env.ATLASDB_URL;
@@ -65,9 +68,6 @@ const sessionOptions ={
     },
 };
 
-// app.get("/",(req,res)=>{
-//     res.send("HI, I am root");
-// });
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -90,6 +90,12 @@ app.use((req,res,next)=>{
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
 app.use("/",userRouter);
+
+app.get("/",wrapAsync(async(req,res)=>{
+    const allListings = await listing.find({});
+    res.render("listings/index.ejs", { allListings });
+}));
+
 
 
 
