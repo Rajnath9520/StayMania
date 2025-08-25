@@ -70,8 +70,17 @@ module.exports.renderEditForm = async(req,res)=>{
 
 module.exports.updateListing = async(req,res)=>{
     let {id} = req.params;
-    let editListing=await listing.findByIdAndUpdate(id,{...req.body.Listing});
     
+    let oldListing = await listing.findById(id);
+
+    let updatedData = { ...req.body.Listing };
+
+    if (!updatedData.category) {
+        updatedData.category = oldListing.category;
+    }
+
+    // Update the listing
+    let editListing = await listing.findByIdAndUpdate(id, updatedData, { new: true });
     if(typeof req.file !== "undefined"){
     let url = req.file.path;
     let filename = req.file.filename;
