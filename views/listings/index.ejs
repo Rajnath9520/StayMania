@@ -29,7 +29,7 @@
     .tax-toggle{
         border: 1px solid black;
         border-radius: 1rem;
-        height:3.25rem;
+        height: 3.25rem;
         padding: 1rem;
         margin-left: 2rem;
         display: flex;
@@ -43,6 +43,17 @@
         text-decoration: none;
         outline: none;
     }
+@media(max-width:876px){
+    .domes, .arctic{
+        display: none;
+    }
+    .tax-toggle{
+        height: 2.25rem;
+        
+    }
+}
+
+
 
 </style>
 <div class="container">
@@ -78,7 +89,7 @@
         <div><i class="fa-solid fa-cow"></i></div>
         <p>Farms</p>
     </a>
-    <a href="/listings/category/Arctic" class="filter">
+    <a href="/listings/category/Arctic" class="filter arctic">
         <div><i class="fa-solid fa-cow"></i></div>
         <p>Arctic</p>
     </a>
@@ -86,7 +97,7 @@
         <div><i class="fa-solid fa-globe"></i></div>
         <p>Desert</p>
     </a>
-    <a href="/listings/category/Domes" class="filter">
+    <a href="/listings/category/Domes" class="filter domes">
         <div><i class="fa-solid fa-landmark-dome"></i></div>
         <p>Domes</p>
     </a>

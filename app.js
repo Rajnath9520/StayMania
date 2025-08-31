@@ -52,7 +52,7 @@ const store = MongoStore.create({
     touchAfter:24*60*60,
 });
 
-store.on("error", ()=>{
+store.on("error", (err)=>{
     console.log("ERROR in MONGO SESSION STORE",err);
 });
 
@@ -106,7 +106,6 @@ app.all('/{*any}',(req,res,next)=>{
 app.use((err,req, res,next)=>{
     let {statusCode=500, message="something went wrong!"}= err;
     res.status(statusCode).render("error.ejs",{message})
-    // res.status(statusCode).send(message);
 });
 app.listen(8080,()=>{
     console.log("server is listening to the port");
